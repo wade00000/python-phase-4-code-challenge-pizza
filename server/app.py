@@ -3,6 +3,7 @@ from models import db, Restaurant, RestaurantPizza, Pizza
 from flask_migrate import Migrate
 from flask import Flask, request, make_response
 from flask_restful import Api, Resource
+from routes import app as api_bp
 import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -12,6 +13,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
+app.register_blueprint(api_bp)
 
 migrate = Migrate(app, db)
 
